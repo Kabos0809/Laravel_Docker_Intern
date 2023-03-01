@@ -5,7 +5,13 @@ COPY 000-default.conf /etc/apache2/sites-enabled/
 
 RUN apt-get update \
     && apt-get install -y zlib1g-dev mariadb-client vim libzip-dev \
-    && docker-php-ext-install zip pdo_mysql
+    && docker-php-ext-install zip pdo_mysql 
+
+RUN cd /etc/apache2/mods-enabled \
+    && ln -s ../mods-available/rewrite.load
+
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
+RUN apt-get install -y nodejs
 
 RUN php -r "copy('https://getcomposer.org/installer','composer-setup.php');"
 RUN php composer-setup.php
