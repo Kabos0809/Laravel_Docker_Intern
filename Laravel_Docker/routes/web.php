@@ -31,5 +31,5 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::get('/threads', function () {
-    return view('threads.index');
+    return view('thread.index');
 })->name('threads');
