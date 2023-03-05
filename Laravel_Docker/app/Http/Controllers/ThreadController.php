@@ -28,10 +28,6 @@ class ThreadController extends Controller
                 'title' => $request->title,
                 'text' => $request->text,
             ]);
-
-            $thread->comments()->create([
-                'text' => $request->body,
-            ]);
         });
 
         return  back();
