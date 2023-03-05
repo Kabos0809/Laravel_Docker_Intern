@@ -10,7 +10,7 @@ class Response extends Model
     use HasFactory;
 
     protected $fillable = [
-        'text'
+        'body'
     ];
 
     public function user()

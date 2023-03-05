@@ -18,9 +18,22 @@ class ThreadController extends Controller
 
     public function store(Request $request)
     {
-        dd([
-            $request->title,
-            $request->body,
+        $request->validate([
+            'title' => 'required|string|max:30',
+            'text' => 'required|string|max:512',
         ]);
+
+        DB::transaction(function () use ($request) {
+            $thread = $request->user()->threads()->create([
+                'title' => $request->title,
+                'text' => $request->text,
+            ]);
+
+            $thread->comments()->create([
+                'text' => $request->body,
+            ]);
+        });
+
+        return  back();
     }
 }
