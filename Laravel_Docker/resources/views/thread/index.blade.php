@@ -5,7 +5,7 @@
     </h2>
     @auth
     <div>
-      <a href="{{ route('thread.create')}}" class="text-gray-800">{{ __('スレッド作成') }}</a>
+      <a href="{{ route('threads.create')}}" class="text-gray-800">{{ __('スレッド作成') }}</a>
     </div>
     @endauth
   </x-slot>

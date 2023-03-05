@@ -34,10 +34,8 @@ require __DIR__.'/auth.php';
 Route::get('/threads', [ThreadController::class, 'index'])->name('threads');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/threads/create', [ThreadController::class, 'create'])->name('thread.create');
+    Route::get('/threads/create', [ThreadController::class, 'create'])->name('threads.create');
     Route::post('/threads/create', [ThreadController::class, 'store']);
 });
 
-Route::middleware('auth')->group(function () {
-    Route::get('/threads/create', [ThreadController::class, 'detail'])->name('thread.detail');
-})
+Route::get('/threads/{thread}', [ThreadController::class, 'detail'])->name('threads.detail');
