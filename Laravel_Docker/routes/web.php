@@ -37,3 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/threads/create', [ThreadController::class, 'create'])->name('thread.create');
     Route::post('/threads/create', [ThreadController::class, 'store']);
 });
+
+Route::middleware('auth')->group(function () {
+    Route::get('/threads/create', [ThreadController::class, 'detail'])->name('thread.detail');
+})
