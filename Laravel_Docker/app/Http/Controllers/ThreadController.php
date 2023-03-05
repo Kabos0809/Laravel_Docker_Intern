@@ -37,6 +37,16 @@ class ThreadController extends Controller
             ]);
         });
 
-        return redirect()->route('threads');
+        return redirect()->route('thread.detail', $thread);
+    }
+
+    public function detail(Thread $thread)
+    {
+        $responses = $thread->responses()->with(['user'])->paginate(20);
+
+        return view('thread.detail', [
+            'thread' => $thread,
+            'comments' => $responses,
+        ]);
     }
 }

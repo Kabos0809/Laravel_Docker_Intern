@@ -3,17 +3,21 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
+use App\Models\Response;
 
 class ResponseItem extends Component
 {
+
+    public $response;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($response)
     {
-        //
+        $this->response = $response;
     }
 
     /**
