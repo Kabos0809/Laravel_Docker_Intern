@@ -46,7 +46,7 @@ class ThreadController extends Controller
 
         return view('thread.detail', [
             'thread' => $thread,
-            'comments' => $responses,
+            'responses' => $responses,
         ]);
     }
 }
