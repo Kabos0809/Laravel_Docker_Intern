@@ -25,13 +25,18 @@
                         </div>
                         <div class="mt-4">
                             <label for="text">{{ __('スレッドの概要 ※512文字') }}</label>
-                            <textarea name="text" id="text" cols="30" rows="3" class="w-full rounded-lg border-2 bg-gray-2 bg-gray-100 @error('text') border-red-500 @enderror"></textarea>
+                            <textarea name="text" id="text" cols="30" rows="6" class="w-full rounded-lg border-2 bg-gray-2 bg-gray-100 @error('text') border-red-500 @enderror"></textarea>
 
                             @error('text')
                             <div class="text-red-500 text-sm mt-2">
                                 {{ $message }}
                             </div>
                             @enderror
+                        </div>
+                        <div class="mt-4">
+                            <center>
+                            <button type="submit" class="w-96 bg-black rounded font-medium px-4 py-2 text-white rounded-2xl">{{ __('作成') }}</button>
+                            </center>
                         </div>
                     </form>
                 </div>

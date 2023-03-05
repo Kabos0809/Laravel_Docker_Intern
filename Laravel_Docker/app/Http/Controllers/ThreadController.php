@@ -3,12 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\Thread;
 
 class ThreadController extends Controller
 {
+
     public function index()
     {
-        return view('thread.index');
+        $threads = Thread::latest()->paginate(20);
+
+        return view('thread.index',[
+            'threads' => $threads
+        ]);
     }
 
     public function create()
@@ -23,13 +30,13 @@ class ThreadController extends Controller
             'text' => 'required|string|max:512',
         ]);
 
-        DB::transaction(function () use ($request) {
-            $thread = $request->user()->threads()->create([
+        $thread = DB::transaction(function () use ($request) {
+            $request->user()->threads()->create([
                 'title' => $request->title,
                 'text' => $request->text,
             ]);
         });
 
-        return  back();
+        return redirect()->route('threads');
     }
 }
