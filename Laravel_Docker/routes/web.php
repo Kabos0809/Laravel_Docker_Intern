@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ThreadController;
+use App\Http\Controllers\ResponseController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,10 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -31,11 +28,13 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/threads', [ThreadController::class, 'index'])->name('threads');
+Route::get('/', [ThreadController::class, 'index'])->name('threads');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/threads/create', [ThreadController::class, 'create'])->name('threads.create');
-    Route::post('/threads/create', [ThreadController::class, 'store']);
+    Route::get('/create', [ThreadController::class, 'create'])->name('threads.create');
+    Route::post('/create', [ThreadController::class, 'store']);
 });
 
-Route::get('/threads/{thread}', [ThreadController::class, 'detail'])->name('threads.detail');
+Route::get('/{thread}', [ThreadController::class, 'detail'])->name('threads.detail');
+
+Route::post('/{thread}/response', [ResponseController::class, 'store'])->name('response.store');

@@ -15,7 +15,7 @@ class ResponseItem extends Component
      *
      * @return void
      */
-    public function __construct($response)
+    public function __construct(Response $response)
     {
         $this->response = $response;
     }
