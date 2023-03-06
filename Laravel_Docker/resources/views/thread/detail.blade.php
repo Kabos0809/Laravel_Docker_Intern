@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex items-center gap-x-4">
             <a href="{{ route('threads') }}">
-                <img src="/left-arrow.svg" width="40" height="40" alt="">
+                <img src="/left-arrow.svg" width="30" height="30" alt="">
             </a>
             <div class="max-w-4xl">
                 <h1 class="font-semibold text-xl text-gray-800 leading-tight ml-5">{{ $thread->title }}</h1>

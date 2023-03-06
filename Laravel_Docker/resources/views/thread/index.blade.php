@@ -18,5 +18,6 @@
     @else
       スレッドがありません
     @endif
+    {{ $threads->links() }}
   </div>
 </x-app-layout>
