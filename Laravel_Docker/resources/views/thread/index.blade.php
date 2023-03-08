@@ -6,7 +6,7 @@
       </h2>
       @auth
       <div>
-        <a href="{{ route('threads.create') }}" class="text-gray-800">{{ __('スレッド作成') }}</a>
+        <a href="{{ route('threads.create') }}" class="text-gray-600 border-b-2 border-white hover:border-blue-400 duration-200 pb-6 px-1 font-bold">{{ __('スレッド作成') }}</a>
       </div>
       @endauth
     </div>
