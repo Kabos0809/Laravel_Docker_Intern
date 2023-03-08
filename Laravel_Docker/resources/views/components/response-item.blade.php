@@ -5,17 +5,17 @@
         <span class="text-sm text-gray-600">{{ $response->created_at->toDateTimeString() }}</span>
         
         <p>{{ $response->body }}</p>
-        <div class="gap-x-4 flex item-center mt-3 mb-2">
+        <div class="gap-x-4 flex item-center mt-1">
             @can('update', $response)
             <a href="{{ route('response.update', [$thread, $response]) }}">
-                <button class="bg-green-500 text-white rounded-lg p-1 pl-2 pr-2">{{ __('編集') }}</button>
+                <button class="text-green-500 hover:text-green-700 duration-100 rounded-lg p-1 pl-2 pr-2">{{ __('編集') }}</button>
             </a>
             @endcan
             @can('delete', $response)
             <form action="{{ route('response.delete', [$thread, $response]) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="bg-red-500 text-white rounded-lg p-1 pl-2 pr-2">{{ __('削除') }}</button>
+                <button type="submit" class="text-red-500 hover:text-red-700 duration-100 rounded-lg p-1 pl-2 pr-2">{{ __('削除') }}</button>
             </form>
             @endcan
         </div>

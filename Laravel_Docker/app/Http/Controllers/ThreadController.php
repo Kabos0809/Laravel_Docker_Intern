@@ -60,21 +60,16 @@ class ThreadController extends Controller
         ]);
     }
 
-    public function update(ThreadUpdateRequest $request, Thread $thread)
+    public function update(Thread $thread, ThreadUpdateRequest $request)
     {   
         $this->authorize('update', $thread);
 
-        $request->user()->threads()->fill($request->validated());
+        $thread->title = $request->title;
+        $thread->text = $request->text;
 
-        $thread_data = DB::transaction(function () use ($request) {
-            $thread->title = $request->title;
-            $thread->text = $request->text;
+        $thread->save();
 
-            $thread = $request->user()->threads()->save();
-            return $thread;
-        });
-
-        return redirect()->route('thread.detail', $thread_data);
+        return redirect()->route('thread.detail', $thread);
     }
 
     public function destroy(Thread $thread)
@@ -83,6 +78,6 @@ class ThreadController extends Controller
 
         $thread->delete();
 
-        return back();
+        return redirect()->route('threads');
     }
 }
