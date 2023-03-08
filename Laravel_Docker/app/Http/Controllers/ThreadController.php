@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Requests\ThreadUpdateRequest;
+use App\Http\Requests\ThreadUpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Thread;
@@ -47,7 +47,7 @@ class ThreadController extends Controller
             return $thread;
         });
 
-        return redirect()->route('thread.detail', $thread);
+        return redirect()->route('threads.detail', $thread);
     }
 
     public function detail(Thread $thread)
@@ -69,7 +69,7 @@ class ThreadController extends Controller
 
         $thread->save();
 
-        return redirect()->route('thread.detail', $thread);
+        return redirect()->route('threads.detail', $thread);
     }
 
     public function destroy(Thread $thread)

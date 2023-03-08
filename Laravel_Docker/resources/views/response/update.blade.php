@@ -17,9 +17,9 @@
                         @method('PATCH')
                         <div>
                             <label for="body">{{ __('レス本文 ※512文字') }}</label>
-                            <textarea name="body" id="body" cols="30" rows="6" class="w-full rounded-lg border-2 bg-gray-2 bg-gray-100 @error('text') border-red-500 @enderror">{{ $response->body }}</textarea>
+                            <textarea name="body" id="body" cols="30" rows="6" class="w-full rounded-lg border-2 bg-gray-2 bg-gray-100 @error('body') border-red-500 @enderror">{{ $response->body }}</textarea>
 
-                            @error('text')
+                            @error('body')
                             <div class="text-red-500 text-sm mt-2">
                                 {{ $message }}
                             </div>

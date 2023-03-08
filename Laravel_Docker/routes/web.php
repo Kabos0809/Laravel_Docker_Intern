@@ -30,11 +30,14 @@ require __DIR__.'/auth.php';
 
 Route::get('/', [ThreadController::class, 'index'])->name('threads');
 
-Route::get('/{thread}', [ThreadController::class, 'detail'])->name('threads.detail');
-
 Route::middleware('auth')->group(function () {
     Route::get('/create', [ThreadController::class, 'create'])->name('threads.create');
     Route::post('/create', [ThreadController::class, 'store']);
+});
+
+Route::get('/{thread}', [ThreadController::class, 'detail'])->name('threads.detail');
+
+Route::middleware('auth')->group(function () {
     Route::get('/{thread}/update', [ThreadController::class, 'edit'])->name('threads.update');
     Route::patch('/{thread}/update', [ThreadController::class, 'update']);
     Route::delete('/{thread}/delete', [ThreadController::class, 'destroy'])->name('threads.delete');
