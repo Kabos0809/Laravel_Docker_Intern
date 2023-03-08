@@ -36,7 +36,7 @@
         <form action="{{ route('response.store', $thread) }}" method="POST" class="ml-4 bg-white w-full">
             @csrf
             <label for="body">{{ __('レス作成')}}</label>
-            <textarea name="body" id="body" cols="30" rows="6" class="w-full rounded-lg broder-2 bg-gray-100 mt-2 @error('response') border-red-500 @enderror"></textarea>
+            <textarea name="body" id="body" cols="30" rows="6" class="w-full rounded-lg broder-2 bg-gray-100 mt-2 pt-1 pb-1 pl-2 pr-2 @error('response') border-red-500 @enderror"></textarea>
             <div class="mt-4">
                 <button type="submit" class="bg-black rounded font-medium px-4 py-2 text-white">{{ __('レス送信') }}</button>
             </div>
