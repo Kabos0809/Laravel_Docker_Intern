@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Requests\ThreadUpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Thread;
@@ -23,6 +24,13 @@ class ThreadController extends Controller
         return view('thread.create');
     }
 
+    public function edit(Thread $thread)
+    {
+        return view('thread.update', [
+            'thread' => $thread,
+        ]);
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -31,10 +39,12 @@ class ThreadController extends Controller
         ]);
 
         $thread = DB::transaction(function () use ($request) {
-            $request->user()->threads()->create([
+            $thread = $request->user()->threads()->create([
                 'title' => $request->title,
                 'text' => $request->text,
             ]);
+
+            return $thread;
         });
 
         return redirect()->route('thread.detail', $thread);
@@ -48,5 +58,31 @@ class ThreadController extends Controller
             'thread' => $thread,
             'responses' => $responses,
         ]);
+    }
+
+    public function update(ThreadUpdateRequest $request, Thread $thread)
+    {   
+        $this->authorize('update', $thread);
+
+        $request->user()->threads()->fill($request->validated());
+
+        $thread_data = DB::transaction(function () use ($request) {
+            $thread->title = $request->title;
+            $thread->text = $request->text;
+
+            $thread = $request->user()->threads()->save();
+            return $thread;
+        });
+
+        return redirect()->route('thread.detail', $thread_data);
+    }
+
+    public function destroy(Thread $thread)
+    {   
+        $this->authorize('delete', $thread);
+
+        $thread->delete();
+
+        return back();
     }
 }
