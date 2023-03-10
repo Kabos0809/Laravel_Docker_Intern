@@ -13,14 +13,14 @@ class ResponsePolicy
 
     public function update(User $user, Response $response)
     {
-        return ($user->id === $response->user_id) || ($user->is_rootuser)
+        return ($user->id === $response->user_id) || ($user->is_rootuser === true)
                     ? Res::allow()
                     : Res::deny('不正な操作です');
     }
 
     public function delete(User $user, Response $response)
     {
-        return ($user->id === $response->user_id) || ($user->is_rootuser)
+        return ($user->id === $response->user_id) || ($user->is_rootuser === true)
                     ? Res::allow()
                     : Res::deny('不正な操作です');
     }

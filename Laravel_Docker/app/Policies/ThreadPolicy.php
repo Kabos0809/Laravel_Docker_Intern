@@ -13,14 +13,14 @@ class ThreadPolicy
 
     public function update(User $user, Thread $thread)
     {
-        return ($user->id === $thread->user_id) || ($user->is_rootuser)
+        return ($user->id === $thread->user_id) || ($user->is_rootuser === true)
                     ? Response::allow()
                     : Response::deny('不正な操作です');
     }
 
     public function delete(User $user, Thread $thread)
     {
-        return ($user->id === $thread->user_id) || ($user->is_rootuser)
+        return ($user->id === $thread->user_id) || ($user->is_rootuser === true)
                     ? Response::allow()
                     : Response::deny('不正な操作です');
     }

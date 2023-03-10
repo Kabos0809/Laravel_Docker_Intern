@@ -47,7 +47,7 @@ class ThreadController extends Controller
             return $thread;
         });
 
-        return redirect()->route('threads.detail', $thread);
+        return redirect()->route('user.threads.detail', $thread);
     }
 
     public function detail(Thread $thread)
@@ -69,7 +69,7 @@ class ThreadController extends Controller
 
         $thread->save();
 
-        return redirect()->route('threads.detail', $thread);
+        return redirect()->route('user.threads.detail', $thread);
     }
 
     public function destroy(Thread $thread)
@@ -78,6 +78,6 @@ class ThreadController extends Controller
 
         $thread->delete();
 
-        return redirect()->route('threads');
+        return redirect()->route('user.threads');
     }
 }

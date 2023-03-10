@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center gap-x-4">
-            <a href="{{ route('threads') }}">
+            <a href="{{ route('user.threads') }}">
                 <img src="/left-arrow.svg" width="30" height="30" alt="">
             </a>
             <div class="max-w-4xl">
@@ -31,9 +31,9 @@
         </div>
     </center>
     @endif
-    @auth
+    @if(auth('users')->user())
     <div class="bg-white max-w-4xl mx-auto mt-8 p-8 pr-16 shadow rounded-lg mb-32">
-        <form action="{{ route('response.store', $thread) }}" method="POST" class="ml-4 bg-white w-full">
+        <form action="{{ route('user.response.store', $thread) }}" method="POST" class="ml-4 bg-white w-full">
             @csrf
             <label for="body">{{ __('レス作成')}}</label>
             <textarea name="body" id="body" cols="30" rows="6" class="w-full rounded-lg broder-2 bg-gray-100 mt-2 pt-1 pb-1 pl-2 pr-2 @error('response') border-red-500 @enderror"></textarea>
@@ -42,13 +42,12 @@
             </div>
         </form>
     </div>
-    @endauth
-    @guest
+    @elseif(!auth('users')->user())
     <div class="bg-white max-w-4xl mx-auto mt-16 p-8 shadow rounded-lg">
         <center>
         <img src="/lock.svg" width="100" height="100" alt="" class="mb-2">
         <h2>レスを書き込むにはログインしてください</h2>
-        <a href="{{ route('login') }}" class="text-blue-500 hover:text-blue-800 duration-100">
+        <a href="{{ route('user.login') }}" class="text-blue-500 hover:text-blue-800 duration-100">
             {{ __('ログインはこちらから') }}
         </a>
         </center>
