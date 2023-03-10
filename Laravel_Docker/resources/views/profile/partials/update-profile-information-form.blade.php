@@ -46,6 +46,10 @@
                 </div>
             @endif
         </div>
+        <div class="pt-2">
+            <label for="is_rootuser">管理者権限</label>
+            <input name="is_rootuser" id="is_rootuser" type="checkbox" value="true" checked="{{ ($user->is_rootuser === true) ? 'checked' : '' }}" />
+        </div>
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
