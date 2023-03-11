@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Response;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response as Res;
+use Illuminate\Support\Facades\Auth;
 
 class ResponsePolicy
 {
@@ -13,14 +14,14 @@ class ResponsePolicy
 
     public function update(User $user, Response $response)
     {
-        return ($user->id === $response->user_id) || ($user->is_rootuser === true)
+        return Auth::guard('users')->user()->id === $thread->user_id
                     ? Res::allow()
                     : Res::deny('不正な操作です');
     }
 
     public function delete(User $user, Response $response)
     {
-        return ($user->id === $response->user_id) || ($user->is_rootuser === true)
+        return Auth::guard('users')->user()->id === $thread->user_id
                     ? Res::allow()
                     : Res::deny('不正な操作です');
     }
