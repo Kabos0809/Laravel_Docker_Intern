@@ -24,14 +24,14 @@ class ThreadController extends Controller
         return view('thread.create');
     }
 
-    public function edit(Thread $thread)
+    public function user_edit(Thread $thread)
     {
         return view('thread.update', [
             'thread' => $thread,
         ]);
     }
 
-    public function store(Request $request)
+    public function user_store(Request $request)
     {
         $request->validate([
             'title' => 'required|string|max:30',
@@ -60,7 +60,7 @@ class ThreadController extends Controller
         ]);
     }
 
-    public function update(Thread $thread, ThreadUpdateRequest $request)
+    public function user_update(Thread $thread, ThreadUpdateRequest $request)
     {   
         $this->authorize('update', $thread);
 
@@ -72,7 +72,7 @@ class ThreadController extends Controller
         return redirect()->route('user.threads.detail', $thread);
     }
 
-    public function destroy(Thread $thread)
+    public function user_destroy(Thread $thread)
     {   
         $this->authorize('delete', $thread);
 

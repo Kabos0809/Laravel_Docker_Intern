@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Thread;
 use App\Models\Response;
 use App\Http\Requests\ResponseUpdateRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ResponseController extends Controller
 {
@@ -18,7 +19,7 @@ class ResponseController extends Controller
         ]);
     }
 
-    public function store(Thread $thread, Request $request)
+    public function user_store(Thread $thread, Request $request)
     {
         $request->validate([
             'body' => 'required|string|max:512'
@@ -26,13 +27,13 @@ class ResponseController extends Controller
 
         $thread->responses()->create([
             'body' => $request->body,
-            'user_id' => $request->user()->id
+            'user_id' => Auth::guard('users')->user()->id
         ]);
 
         return back();
     }
 
-    public function update(Thread $thread, Response $response, ResponseUpdateRequest $request)
+    public function user_update(Thread $thread, Response $response, ResponseUpdateRequest $request)
     {   
         $this->authorize('update', $response);
 
@@ -42,7 +43,7 @@ class ResponseController extends Controller
         return redirect()->route('threads.detail', $thread);
     }
 
-    public function destroy(Thread $thread, Response $response)
+    public function user_destroy(Thread $thread, Response $response)
     {
         $this->authorize('delete', $response);
 

@@ -52,6 +52,7 @@
                 <div class="flex gap-x-4">
                     <a href="{{ route('user.login') }}">{{ __('Log in') }}</a>
                     <a href="{{ route('user.register') }}">{{ __('Register') }}</a>
+                    <a href="{{ route('admin.login') }}">{{ __('管理者ログイン') }}</a>
                 </div>
                 @endguest
             </div>
