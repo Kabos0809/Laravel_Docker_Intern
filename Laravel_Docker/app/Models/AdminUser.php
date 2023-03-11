@@ -19,11 +19,11 @@ class AdminUser extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-    ]
+    ];
 
     protected $casts = [
         'email_verified_at' => 'datetime'
-    ]
+    ];
 
     public function threads()
     {

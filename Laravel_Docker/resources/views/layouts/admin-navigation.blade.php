@@ -24,7 +24,7 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
+                            <div>{{ Auth::guard('admins')->user()->name }}</div>
 
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -38,7 +38,9 @@
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('admin.logout') }}">
                             @csrf
-
+                            <x-dropdown-link :href="route('admin.profile.edit')">
+                                {{ __('Profile') }}
+                            </x-dropdown-link>
                             <x-dropdown-link :href="route('admin.logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
@@ -48,12 +50,6 @@
                     </x-slot>
                 </x-dropdown>
                 @endauth
-                @guest
-                <div class="flex gap-x-4">
-                    <a href="{{ route('admin.login') }}">{{ __('Log in') }}</a>
-                    <a href="{{ route('admin.register') }}">{{ __('Register') }}</a>
-                </div>
-                @endguest
             </div>
 
             <!-- Hamburger -->

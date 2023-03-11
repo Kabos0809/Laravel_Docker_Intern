@@ -9,7 +9,20 @@ use App\Http\Controllers\User\Auth\PasswordController;
 use App\Http\Controllers\User\Auth\PasswordResetLinkController;
 use App\Http\Controllers\User\Auth\RegisteredUserController;
 use App\Http\Controllers\User\Auth\VerifyEmailController;
+use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\ResponseController;
+use App\Http\Controllers\ThreadController;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/dashboard', function () {
+    return view('user.user-dashboard');
+})->middleware(['auth:users', 'verified'])->name('dashboard');
+
+Route::middleware('auth:users')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -56,4 +69,19 @@ Route::middleware('auth:users')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
+});
+
+Route::middleware('auth:users')->group(function () {
+    Route::get('user/create', [ThreadController::class, 'create'])->name('threads.create');
+    Route::post('user/create', [ThreadController::class, 'store']);
+    Route::get('user/{thread}/update', [ThreadController::class, 'user_edit'])->name('threads.update');
+    Route::patch('user/{thread}/update', [ThreadController::class, 'user_update']);
+    Route::delete('user/{thread}/delete', [ThreadController::class, 'user_destroy'])->name('threads.delete');
+});
+
+Route::middleware('auth:users')->group(function () {
+    Route::post('{thread}/response', [ResponseController::class, 'user_store'])->name('response.store');
+    Route::get('{thread}/{response}/update', [ResponseController::class, 'edit'])->name('response.update');
+    Route::patch('{thread}/{response}/update', [ResponseController::class, 'user_update']);
+    Route::delete('{thread}/{response}/delete', [ResponseController::class, 'user_destroy'])->name('response.delete');
 });

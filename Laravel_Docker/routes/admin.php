@@ -9,10 +9,13 @@ use App\Http\Controllers\Admin\Auth\PasswordController;
 use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\ThreadController;
+use App\Http\Controllers\ResponseController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard', function () {
-    return view('admin.dashboard');
+    return view('admin.admin-dashboard');
 })->middleware(['auth:admins', 'verified'])->name('dashboard');
 
 Route::middleware('auth:admins')->group(function () {
@@ -22,26 +25,26 @@ Route::middleware('auth:admins')->group(function () {
 });
 
 Route::middleware('guest')->group(function () {
-    Route::get('register', [RegisteredUserController::class, 'create'])
+    Route::get('/register', [RegisteredUserController::class, 'create'])
                 ->name('register');
 
-    Route::post('register', [RegisteredUserController::class, 'store']);
+    Route::post('/register', [RegisteredUserController::class, 'store']);
 
-    Route::get('login', [AuthenticatedSessionController::class, 'create'])
+    Route::get('/login', [AuthenticatedSessionController::class, 'create'])
                 ->name('login');
 
-    Route::post('login', [AuthenticatedSessionController::class, 'store']);
+    Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 
-    Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
+    Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])
                 ->name('password.request');
 
-    Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])
+    Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])
                 ->name('password.email');
 
-    Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
+    Route::get('/reset-password/{token}', [NewPasswordController::class, 'create'])
                 ->name('password.reset');
 
-    Route::post('reset-password', [NewPasswordController::class, 'store'])
+    Route::post('/reset-password', [NewPasswordController::class, 'store'])
                 ->name('password.store');
 });
 
@@ -66,4 +69,13 @@ Route::middleware('auth:admins')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
+});
+
+Route::middleware('auth:admins')->group(function () {
+    Route::get('/{thread}', [ThreadController::class, 'admin_detail'])->name('threads.detail');
+    Route::delete('admin/{thread}/delete', [ThreadController::class, 'admin_destroy'])->name('threads.delete');
+});
+
+Route::middleware('auth:admins')->group(function () {
+    Route::delete('/{thread}/{response}/delete', [ResponseController::class, 'admin_destroy'])->name('response.delete');
 });
