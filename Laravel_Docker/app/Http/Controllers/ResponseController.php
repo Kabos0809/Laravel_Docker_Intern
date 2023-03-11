@@ -51,4 +51,11 @@ class ResponseController extends Controller
 
         return redirect()->route('threads.detail', $thread);
     }
+
+    public function admin_destroy(Thread $thread, Response $response)
+    {
+        $response->delete();
+
+        return redirect()->route('admin.threads.detail', $thread);
+    }
 }

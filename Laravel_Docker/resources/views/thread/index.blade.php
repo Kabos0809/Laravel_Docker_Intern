@@ -4,11 +4,11 @@
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
           {{ __('スレッド一覧') }}
       </h2>
-      @if(auth('users')->user())
+      @auth('users')
       <div>
         <a href="{{ route('user.threads.create') }}" class="text-gray-600 border-b-2 border-white hover:border-blue-400 duration-200 pb-6 px-1 font-bold">{{ __('スレッド作成') }}</a>
       </div>
-      @endif
+      @endauth
     </div>
   </x-slot>
 

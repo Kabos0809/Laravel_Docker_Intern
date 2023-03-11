@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center gap-x-4">
-            <a href="{{ route('user.threads') }}">
+            <a href="{{ route('threads') }}">
                 <img src="/left-arrow.svg" width="30" height="30" alt="">
             </a>
             <div class="max-w-4xl">
@@ -31,7 +31,7 @@
         </div>
     </center>
     @endif
-    @if(auth('users')->user())
+    @auth('users')
     <div class="bg-white max-w-4xl mx-auto mt-8 p-8 pr-16 shadow rounded-lg mb-32">
         <form action="{{ route('user.response.store', $thread) }}" method="POST" class="ml-4 bg-white w-full">
             @csrf
@@ -42,7 +42,8 @@
             </div>
         </form>
     </div>
-    @elseif(!auth('users')->user())
+    @endauth
+    @guest('users')
     <div class="bg-white max-w-4xl mx-auto mt-16 p-8 shadow rounded-lg">
         <center>
         <img src="/lock.svg" width="100" height="100" alt="" class="mb-2">

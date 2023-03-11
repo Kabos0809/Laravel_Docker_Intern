@@ -14,7 +14,16 @@ class ThreadController extends Controller
     {
         $threads = Thread::latest()->paginate(10);
 
-        return view('thread.index',[
+        return view('thread.index', [
+            'threads' => $threads
+        ]);
+    }
+
+    public function admin_index()
+    {
+        $threads = Thread::latest()->paginate(10);
+
+        return view('thread.admin-index', [
             'threads' => $threads
         ]);
     }
@@ -31,7 +40,7 @@ class ThreadController extends Controller
         ]);
     }
 
-    public function user_store(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'title' => 'required|string|max:30',
@@ -47,7 +56,26 @@ class ThreadController extends Controller
             return $thread;
         });
 
-        return redirect()->route('user.threads.detail', $thread);
+        return redirect()->route('threads.detail', $thread);
+    }
+
+    public function admin_store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string|max:30',
+            'text' => 'required|string|max:512',
+        ]);
+
+        $thread = DB::transaction(function () use ($request) {
+            $thread = $request->user()->threads()->create([
+                'title' => $request->title,
+                'text' => $request->text,
+            ]);
+
+            return $thread;
+        });
+
+        return redirect()->route('admin.threads.detail', $thread);
     }
 
     public function detail(Thread $thread)
@@ -55,6 +83,16 @@ class ThreadController extends Controller
         $responses = $thread->responses()->with(['user'])->paginate(20);
 
         return view('thread.detail', [
+            'thread' => $thread,
+            'responses' => $responses,
+        ]);
+    }
+
+    public function admin_detail(Thread $thread)
+    {
+        $responses = $thread->responses()->with(['user'])->paginate(20);
+
+        return view('thread.admin-detail', [
             'thread' => $thread,
             'responses' => $responses,
         ]);
@@ -69,7 +107,7 @@ class ThreadController extends Controller
 
         $thread->save();
 
-        return redirect()->route('user.threads.detail', $thread);
+        return redirect()->route('threads.detail', $thread);
     }
 
     public function user_destroy(Thread $thread)
@@ -78,6 +116,13 @@ class ThreadController extends Controller
 
         $thread->delete();
 
-        return redirect()->route('user.threads');
+        return redirect()->route('threads');
+    }
+
+    public function admin_destroy(Thread $thread)
+    {
+        $thread->delete();
+        
+        return redirect()->route('threads');
     }
 }
