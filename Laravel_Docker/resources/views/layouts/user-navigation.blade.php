@@ -72,7 +72,7 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
             @endauth
-            @guest
+            @guest('users')
             <x-responsive-nav-link :href="route('user.login')" :active="request()->routeIs('user.login')">
                 {{ __('Log in') }}
             </x-responsive-nav-link>
