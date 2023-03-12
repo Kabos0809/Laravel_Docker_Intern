@@ -10,22 +10,29 @@ use App\Models\Thread;
 class ThreadController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
         $threads = Thread::latest()->paginate(10);
+
+        $search = $request->input('search');
+
+        $query = Thread::query();
+
+        if ($search) {
+            $spaceConv = mb_convert_kana($search, 's');
+
+            $wordArraySearched = preg_split('/[\s,]+/', $spaceConv, -1, PREG_SPLIT_NO_EMPTY);
+
+            foreach($wordArraySearched as $value) {
+                $query->where('title', 'LIKE', "%{$value}%");
+            }
+        }
+
+        $threads = $query->orderBy('created_at', 'desc')->paginate(10);
 
         return view('thread.index', [
             'threads' => $threads
-        ]);
-    }
-
-    public function admin_index()
-    {
-        $threads = Thread::latest()->paginate(10);
-
-        return view('thread.admin-index', [
-            'threads' => $threads
-        ]);
+        ])->with('search', $search);
     }
 
     public function create()
