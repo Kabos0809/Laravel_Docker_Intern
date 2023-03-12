@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ThreadUpdateRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Models\Thread;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class ThreadController extends Controller
 {

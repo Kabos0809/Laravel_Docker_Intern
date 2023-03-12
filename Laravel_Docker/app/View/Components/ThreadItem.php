@@ -2,8 +2,8 @@
 
 namespace App\View\Components;
 
-use Illuminate\View\Component;
 use App\Models\Thread;
+use Illuminate\View\Component;
 
 class ThreadItem extends Component
 {   
