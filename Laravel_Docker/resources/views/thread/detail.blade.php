@@ -10,7 +10,7 @@
         </div>
     </x-slot>
 
-    <div class="pt-5 px-5 pb-5 max-w-4xl bg-white mt-4 mx-auto my-7 shadow rounded-lg">
+    <div class="pt-5 px-5 pb-5 max-w-4xl bg-white mt-4 mx-auto my-8 shadow rounded-lg">
         <h2 class="text-xl text-black mb-2">スレの説明</h2>
         <hr/>
         <p class="text-lg text-gray-800 ml-2 mt-2 overflow-hidden">{{ $thread->text }}</p>
@@ -44,7 +44,7 @@
     </div>
     @endauth
     @guest('users')
-    <div class="bg-white max-w-4xl mx-auto mt-16 p-8 shadow rounded-lg">
+    <div class="bg-white max-w-4xl mx-auto mt-16 mb-20 p-8 shadow rounded-lg">
         <center>
         <img src="/lock.svg" width="100" height="100" alt="" class="mb-2">
         <h2>レスを書き込むにはログインしてください</h2>

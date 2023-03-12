@@ -12,7 +12,23 @@
     </div>
   </x-slot>
 
-  <div class="py-12 max-w-4xl mx-auto sm:px-6 lg:px-8 grid gap-y-2">
+  <form method="GET" action="{{ route('threads') }}" class="max-w-4xl mt-6 mx-auto pl-32 flex items-center space-x-4">
+    <input type="search" placeholder="スレッドタイトルを入力" name="search" value="@if (isset($search)) {{ $search }} @endif" class="w-2/3 rounded-lg">
+      <button type="submit" class="bg-black hover:bg-gray-800 text-white p-2 px-4 rounded-lg duration-100">検索</button>
+      <button>
+          <a href="{{ route('threads') }}" class="bg-gray-600 hover:bg-gray-700 text-white p-2 px-4 rounded-lg duration-100">
+              クリア
+          </a>
+      </button>
+  </form>
+
+  @if($search)
+  <div class="max-w-4xl mx-auto mt-4 pl-16">
+    {{ $search }}{{ __('の検索結果') }}
+  </div>
+  @endif
+
+  <div class="py-6 max-w-4xl mx-auto sm:px-6 lg:px-8 grid gap-y-2">
     @if ($threads->count())
       @foreach ($threads as $thread)
         <x-thread-item :thread="$thread" />
@@ -20,6 +36,6 @@
     @else
       スレッドがありません
     @endif
-    {{ $threads->links() }}
+    {{ $threads->appends(Request::only('keyword'))->links() }}
   </div>
 </x-app-layout>
