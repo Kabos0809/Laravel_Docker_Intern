@@ -1,2 +1,5 @@
 
 .env
+
+docker/db/data
+docker/db/sql
