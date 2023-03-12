@@ -3,10 +3,11 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
-use app\Models\Thread;
-use app\Models\Response;
-use app\Policies\ThreadPolicy;
-use app\Policies\ResponsePolicy;
+
+use App\Models\Response;
+use App\Policies\ResponsePolicy;
+use App\Models\Thread;
+use App\Policies\ThreadPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider

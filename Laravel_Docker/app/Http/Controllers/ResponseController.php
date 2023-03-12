@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Thread;
 use App\Models\Response;
 use App\Http\Requests\ResponseUpdateRequest;
+use App\Models\Thread;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class ResponseController extends Controller
 {
