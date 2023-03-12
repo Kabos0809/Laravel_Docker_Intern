@@ -2,9 +2,9 @@
 
 namespace App\View\Components;
 
-use Illuminate\View\Component;
 use App\Models\Response;
 use App\Models\Thread;
+use Illuminate\View\Component;
 
 class ResponseItem extends Component
 {

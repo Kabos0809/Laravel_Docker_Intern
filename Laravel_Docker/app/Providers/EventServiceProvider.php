@@ -2,10 +2,17 @@
 
 namespace App\Providers;
 
+<<<<<<< HEAD
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+=======
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Event;
+>>>>>>> ff169c148cf31df017191803942d695c4aab8084
 
 class EventServiceProvider extends ServiceProvider
 {
