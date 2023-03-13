@@ -10,6 +10,7 @@
 
 - Laravel_Docker_Intern直下に` .env `を作成し以下にある ` .env `の内容をコピーしてください.
 - ` $ docker compose up -d --build `にて各コンテナを起動してください.
+- ` $ docker compose exec php bash `でphpコンテナに入る.
 - ` $ cd Laravel_Docker `でLaravel_Dockerディレクトリに移動します.
 - ` Laravel_docker `直下に` .env `を作成し以下にある ` Laravel_Docker/.env `の内容をコピーしてください.
 - ` $ composer install `を実行する.
