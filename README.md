@@ -10,10 +10,10 @@
 
 - Laravel_Docker_Intern直下に` .env `を作成し以下にある ` .env `の内容をコピーしてください.
 - ` $ docker compose up -d --build `にて各コンテナを起動してください.
-- ` $ docker compose exec php bash `でphpコンテナに入ります.
-- ` $ cd Laravel_docker`でvar/www/Laravel_dockerディレクトリに移動してください.
+- ` $ cd Laravel_Docker `でLaravel_Dockerディレクトリに移動します.
 - ` Laravel_docker `直下に` .env `を作成し以下にある ` Laravel_Docker/.env `の内容をコピーしてください.
 - ` $ composer install `を実行する.
+- ` $ php artisan migarate `でマイグレーションを行う.
 - ` $ npm install && npm run build`を行う.
 - ` localhost:8000 `にアクセスすればスレッド一覧が表示されます.
 
