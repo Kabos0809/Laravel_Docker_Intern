@@ -8,11 +8,11 @@
 
 ## セットアップ方法
 
-- Laravel_Docker_Intern直下に` .env `を作成し以下にある ` .env `の内容をコピーしてください.
+- Laravel_Docker_Intern直下に` .env `を作成し以下にある ` .env `のフォーマットに従って記述してください.
 - ` $ docker compose up -d --build `にて各コンテナを起動してください.
 - ` $ docker compose exec php bash `でphpコンテナに入る.
 - ` $ cd Laravel_Docker `でLaravel_Dockerディレクトリに移動します.
-- ` Laravel_docker `直下に` .env `を作成し以下にある ` Laravel_Docker/.env `の内容をコピーしてください.
+- ` Laravel_docker `直下に` .env `を作成し以下にある ` Laravel_Docker/.env `の内容をコピーし, DBの部分を任意の値に変更してください
 - ` $ composer install `を実行する.
 - ` $ php artisan migarate `でマイグレーションを行う.
 - ` $ npm install && npm run build`を行う.
@@ -21,11 +21,11 @@
 ## .env
 
 ```
-MYSQL_ROOT_PASSWORD=Hakurei8901016 
-MYSQL_DATABASE=intern 
-MYSQL_USER=kabos 
-MYSQL_PASSWORD=Hakurei35 
-TZ='Asia/Tokyo'
+MYSQL_ROOT_PASSWORD=
+MYSQL_DATABASE= 
+MYSQL_USER= 
+MYSQL_PASSWORD= 
+TZ=
 ```
 
 ## Laravel_Docker/.env
@@ -40,11 +40,11 @@ LOG_CHANNEL=stack
 LOG_DEPRECATIONS_CHANNEL=null
 LOG_LEVEL=debug
 DB_CONNECTION=mysql
-DB_HOST=db
+DB_HOST= MYSQLコンテナのコンテナ名
 DB_PORT=3306
-DB_DATABASE=intern
-DB_USERNAME=kabos
-DB_PASSWORD=Hakurei35
+DB_DATABASE= MYSQL_DATABASEと同じ
+DB_USERNAME= MYSQL_USERと同じ
+DB_PASSWORD= MYSQL_PASSWORDと同じ
 BROADCAST_DRIVER=log
 CACHE_DRIVER=file
 FILESYSTEM_DISK=local
